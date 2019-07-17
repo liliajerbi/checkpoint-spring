@@ -4,9 +4,7 @@ package com.example.checkpoint4.recipeCheckpoint.controller;
 import com.example.checkpoint4.recipeCheckpoint.model.User;
 import com.example.checkpoint4.recipeCheckpoint.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -22,5 +20,10 @@ public class UserController {
     @PostMapping("/user/signIn")
     public User signIn (@RequestBody User user) {
         return userRepository.findUserByEmailIgnoreCaseAndPassword(user.getEmail(), user.getPassword());
+    }
+
+    @GetMapping("/user/{userId}")
+    public User readOneUser(@PathVariable Long userId) {
+        return userRepository.findById(userId).get();
     }
 }
