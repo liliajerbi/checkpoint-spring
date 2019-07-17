@@ -31,4 +31,8 @@ public class RecipeController {
         return recipeRepository.save(recipe);
     }
 
+    @DeleteMapping("/recipes/{recipeId}")
+    public void deleteRecipe(@PathVariable Long recipeId) {
+        recipeRepository.deleteById(recipeId);
+    }
 }

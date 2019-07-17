@@ -1,6 +1,5 @@
 package com.example.checkpoint4.recipeCheckpoint.controller;
 
-
 import com.example.checkpoint4.recipeCheckpoint.model.User;
 import com.example.checkpoint4.recipeCheckpoint.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +12,13 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping("/user/signUp")
-    public User createUser (@RequestBody User user) {
+    public User createUser(@RequestBody User user) {
         return userRepository.save(user);
     }
 
-    @PostMapping("/user/signIn")
-    public User signIn (@RequestBody User user) {
-        return userRepository.findUserByEmailIgnoreCaseAndPassword(user.getEmail(), user.getPassword());
+    @GetMapping("/user/signIn/{email}/{password}")
+    public User signIn(@PathVariable String email, @PathVariable String password) {
+        return userRepository.findUserByEmailIgnoreCaseAndPassword(email, password);
     }
 
     @GetMapping("/user/{userId}")
